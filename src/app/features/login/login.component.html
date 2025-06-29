@@ -1,0 +1,51 @@
+<div class="login-container">
+  <div class="info-section">
+    <div class="content-wrapper">
+      <div class="logo">
+        <img src="../../../assets/images/sso-logo.svg" alt="Company Logo">
+      </div>
+      <h1>Secure Single Sign-On</h1>
+      <p class="description">
+        Access all your applications with one set of credentials.
+        Our SSO solution provides enterprise-grade security while
+        simplifying your login experience.
+      </p>
+      <div class="features">
+        <div class="feature-item">
+          <mat-icon>security</mat-icon>
+          <span>Enterprise-grade security</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon>link</mat-icon>
+          <span>Connect to multiple apps</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon>fingerprint</mat-icon>
+          <span>Password less authentication</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="login-card">
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Sign in to continue</p>
+    
+    <div class="social-buttons">
+      <button class="btn-google" (click)="signInWithGoogle()">
+        <img src="../../../../assets/images/google-logo.svg" alt="">
+        <span>Sign in with Google</span>
+      </button>
+      
+      <button class="btn-github" (click)="signInWithMicrosoft()">
+        <img src="../../../../assets/images/microsoft-logo.svg" alt="">
+        <span>Sign in with Microsoft</span>
+      </button>
+    </div>
+    
+    <!-- <div class="divider">
+      <span>OR</span>
+    </div> -->
+    
+    <!-- Email/password form could go here -->
+  </div>
+</div>
