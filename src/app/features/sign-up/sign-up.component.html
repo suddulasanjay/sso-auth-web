@@ -1,0 +1,126 @@
+<div class="signup-wrapper">
+  <!-- Left: Info Section -->
+  <div class="signup-info">
+    <h1>Welcome to MyConnect</h1>
+    <p>
+      Single Sign-On (SSO) allows you to register once and use the same account
+      across all our connected client applications.
+    </p>
+    <p>One login. Multiple apps. Seamless access.</p>
+    <img
+      src="assets/images/sso-illustration.svg"
+      alt="SSO Illustration"
+      class="info-image"
+    />
+  </div>
+
+  <!-- Right: Sign Up Form -->
+  <div class="signup-form-section mat-elevation-z4">
+    <h2 class="signup-title">Create Your Account</h2>
+
+    <form
+      [formGroup]="signupForm"
+      (ngSubmit)="onSubmit()"
+      class="signup-form"
+      novalidate
+    >
+      <!-- First Name -->
+      <mat-form-field appearance="outline" class="signup-field">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" required />
+        @if (signupForm.get('firstName')?.touched && signupForm.get('firstName')?.hasError('required')) {
+          <mat-error>First name is required</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Last Name -->
+      <mat-form-field appearance="outline" class="signup-field">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" />
+        @if (signupForm.get('lastName')?.touched && signupForm.get('lastName')?.hasError('required')) {
+          <mat-error>Last name is required</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field appearance="outline" class="signup-field">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" required />
+        @if (signupForm.get('email')?.touched && signupForm.get('email')?.hasError('email')) {
+          <mat-error>Enter a valid email</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field appearance="outline" class="signup-field">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          formControlName="password"
+          required
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hidePassword = !hidePassword"
+          aria-label="Toggle password visibility"
+        >
+          <mat-icon>{{
+            hidePassword ? 'visibility_off' : 'visibility'
+          }}</mat-icon>
+        </button>
+        @if (signupForm.get('password')?.touched && signupForm.get('password')?.hasError('minlength')) {
+          <mat-error>Minimum 6 characters required</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Confirm Password -->
+      <mat-form-field appearance="outline" class="signup-field">
+        <mat-label>Confirm Password</mat-label>
+        <input
+          matInput
+          [type]="hideConfirmPassword ? 'password' : 'text'"
+          formControlName="confirmPassword"
+          required
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hideConfirmPassword = !hideConfirmPassword"
+          aria-label="Toggle confirm password visibility"
+        >
+          <mat-icon>{{
+            hideConfirmPassword ? 'visibility_off' : 'visibility'
+          }}</mat-icon>
+        </button>
+        @if ( signupForm.get('confirmPassword')?.dirty && signupForm.get('confirmPassword')?.hasError('notMatching')) {
+          <mat-error>Password do not match</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Submit Button -->
+      <button
+        mat-raised-button
+        color="primary"
+        class="submit-btn"
+        type="submit"
+        [disabled]="signupForm.invalid || loading"
+      >
+        {{ loading ? 'Creating Account...' : 'Sign Up' }}
+      </button>
+
+      <!-- Global Error -->
+      @if (errorMessage) {
+        <div class="error-message">{{ errorMessage }}</div>
+      }
+    </form>
+
+    <div class="switch-link">
+      Already have an account?
+      <a routerLink="/login">Login</a>
+    </div>
+  </div>
+</div>

@@ -1,14 +1,13 @@
 <div class="login-container">
+  <!-- Info Section -->
   <div class="info-section">
     <div class="content-wrapper">
       <div class="logo">
-        <img src="../../../assets/images/sso-logo.svg" alt="Company Logo">
+        <img src="../../../assets/images/sso-logo.svg" alt="Company Logo" />
       </div>
       <h1>Secure Single Sign-On</h1>
       <p class="description">
-        Access all your applications with one set of credentials.
-        Our SSO solution provides enterprise-grade security while
-        simplifying your login experience.
+        Access all your applications with one set of credentials. Our SSO solution provides enterprise-grade security while simplifying your login experience.
       </p>
       <div class="features">
         <div class="feature-item">
@@ -26,26 +25,71 @@
       </div>
     </div>
   </div>
+
+  <!-- Login Card -->
   <div class="login-card">
     <h2>Welcome Back</h2>
     <p class="subtitle">Sign in to continue</p>
-    
+
+    <!-- Email/Password Login Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="custom-login-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" placeholder="Enter email" />
+
+        @if (loginForm.get('email')?.hasError('required')) {
+          <mat-error>Email is required</mat-error>
+        }
+        @if (loginForm.get('email')?.hasError('email')) {
+          <mat-error>Invalid email format</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="Enter password" />
+
+        @if (loginForm.get('password')?.hasError('required')) {
+          <mat-error>Password is required</mat-error>
+        }
+        @if (loginForm.get('password')?.hasError('minlength')) {
+          <mat-error>Minimum 6 characters</mat-error>
+        }
+      </mat-form-field>
+
+      @if (errorMessage) {
+        <div class="error-box">
+          * {{ errorMessage }}
+        </div>
+      }
+
+      <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid" class="full-width">
+        Login
+      </button>
+    </form>
+
+    <!-- Divider -->
+    <div class="divider">
+      <span>OR</span>
+    </div>
+
+    <!-- Social Logins -->
     <div class="social-buttons">
       <button class="btn-google" (click)="signInWithGoogle()">
-        <img src="../../../../assets/images/google-logo.svg" alt="">
+        <img src="../../../../assets/images/google-logo.svg" alt="" />
         <span>Sign in with Google</span>
       </button>
-      
+
       <button class="btn-github" (click)="signInWithMicrosoft()">
-        <img src="../../../../assets/images/microsoft-logo.svg" alt="">
+        <img src="../../../../assets/images/microsoft-logo.svg" alt="" />
         <span>Sign in with Microsoft</span>
       </button>
     </div>
-    
-    <!-- <div class="divider">
-      <span>OR</span>
-    </div> -->
-    
-    <!-- Email/password form could go here -->
+
+    <!-- Redirect to Sign Up -->
+    <div class="switch-link">
+      Don't have an account?
+      <a routerLink="/sign-up">Sign up</a>
+    </div>
   </div>
 </div>
